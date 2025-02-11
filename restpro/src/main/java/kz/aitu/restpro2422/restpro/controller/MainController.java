@@ -1,13 +1,12 @@
 package kz.aitu.restpro2422.restpro.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import kz.aitu.restpro2422.restpro.entities.Cinema;
-import kz.aitu.restpro2422.restpro.entities.Movie;
-import kz.aitu.restpro2422.restpro.entities.Viewer;
-import kz.aitu.restpro2422.restpro.repositroy.CinemaRepo;
-import kz.aitu.restpro2422.restpro.repositroy.MovieRepo;
-import kz.aitu.restpro2422.restpro.repositroy.ViewerRepo;
+import kz.aitu.restpro2422.restpro.entities.Account;
+import kz.aitu.restpro2422.restpro.entities.Bank;
+import kz.aitu.restpro2422.restpro.entities.Customer;
+import kz.aitu.restpro2422.restpro.repository.AccountRepo;
+import kz.aitu.restpro2422.restpro.repository.BankRepo;
+import kz.aitu.restpro2422.restpro.repository.CustomerRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -21,127 +20,125 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class MainController {
 
-    private final CinemaRepo cinemaRepo;
-    private final MovieRepo movieRepo;
-    private final ViewerRepo viewerRepo;
+    private final AccountRepo accountRepo;
+    private final BankRepo bankRepo;
+    private final CustomerRepo customerRepo;
     private final ObjectMapper objectMapper;
 
-    // *** CINEMA ***
-    @PostMapping("/cinema/add")
-    public String addCinema(@RequestBody Cinema cinema) {
+    // *** ACCOUNT (Account) ***
+    @PostMapping("/account/add")
+    public String addAccount(@RequestBody Account account) {
         try {
-            cinemaRepo.save(cinema);
-            return "Cinema added successfully!";
+            accountRepo.save(account);
+            return "Account added successfully!";
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
     }
 
-    @GetMapping("/cinema/all")
-    public List<Cinema> getAllCinemas() {
-        return cinemaRepo.findAll();
+    @GetMapping("/account/all")
+    public List<Account> getAllAccounts() {
+        return accountRepo.findAll();
     }
 
-    @GetMapping("/cinema")
-    public Optional<Cinema> getCinema(@RequestParam int id) {
-        return cinemaRepo.findById(id);
+    @GetMapping("/account")
+    public Optional<Account> getAccount(@RequestParam int id) {
+        return accountRepo.findById(id);
     }
 
-    @DeleteMapping("/cinema")
-    public String deleteCinema(@RequestParam int id) {
-        if (cinemaRepo.existsById(id)) {
-            cinemaRepo.deleteById(id);
-            return "Cinema deleted successfully!";
+    @DeleteMapping("/account")
+    public String deleteAccount(@RequestParam int id) {
+        if (accountRepo.existsById(id)) {
+            accountRepo.deleteById(id);
+            return "Account deleted successfully!";
         }
-        return "Cinema not found!";
+        return "Account not found!";
     }
 
-    @PutMapping("/cinema/update")
-    public String updateCinema(@RequestBody Cinema cinema) {
-        if (!cinemaRepo.existsById(cinema.getId())) {
-            return "Cinema not found!";
+    @PutMapping("/account/update")
+    public String updateAccount(@RequestBody Account account) {
+        if (!accountRepo.existsById(account.getId())) {
+            return "Account not found!";
         }
-        cinemaRepo.save(cinema);
-        return "Cinema updated successfully!";
+        accountRepo.save(account);
+        return "Account updated successfully!";
     }
 
-    // *** MOVIE ***
-    @PostMapping("/movie/add")
-    public String addMovie(@RequestBody Movie movie) {
+    // *** BANK (Bank) ***
+    @PostMapping("/bank/add")
+    public String addBank(@RequestBody Bank bank) {
         try {
-            movieRepo.save(movie);
-            return "Movie added successfully!";
+            bankRepo.save(bank);
+            return "Bank record added successfully!";
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
     }
 
-    @GetMapping("/movie/all")
-    public List<Movie> getAllMovies() {
-        return movieRepo.findAll();
+    @GetMapping("/bank/all")
+    public List<Bank> getAllBanks() {
+        return bankRepo.findAll();
     }
 
-    @GetMapping("/movie")
-    public Optional<Movie> getMovie(@RequestParam int id) {
-        return movieRepo.findById(id);
+    @GetMapping("/bank")
+    public Optional<Bank> getBank(@RequestParam int id) {
+        return bankRepo.findById(id);
     }
 
-    @DeleteMapping("/movie")
-    public String deleteMovie(@RequestParam int id) {
-        if (movieRepo.existsById(id)) {
-            movieRepo.deleteById(id);
-            return "Movie deleted successfully!";
+    @DeleteMapping("/bank")
+    public String deleteBank(@RequestParam int id) {
+        if (bankRepo.existsById(id)) {
+            bankRepo.deleteById(id);
+            return "Bank record deleted successfully!";
         }
-        return "Movie not found!";
+        return "Bank record not found!";
     }
 
-    @PutMapping("/movie/update")
-    public String updateMovie(@RequestBody Movie movie) {
-        if (!movieRepo.existsById(movie.getId())) {
-            return "Movie not found!";
+    @PutMapping("/bank/update")
+    public String updateBank(@RequestBody Bank bank) {
+        if (!bankRepo.existsById(bank.getId())) {
+            return "Bank record not found!";
         }
-        movieRepo.save(movie);
-        return "Movie updated successfully!";
+        bankRepo.save(bank);
+        return "Bank record updated successfully!";
     }
 
-    // *** VIEWER ***
-    @PostMapping("/viewer/add")
-    public String addViewer(@RequestBody Viewer viewer) {
+    // *** CUSTOMER (Customer) ***
+    @PostMapping("/customer/add")
+    public String addCustomer(@RequestBody Customer customer) {
         try {
-            viewerRepo.save(viewer);
-            return "Viewer added successfully!";
+            customerRepo.save(customer);
+            return "Customer added successfully!";
         } catch (Exception e) {
             return "Error: " + e.getMessage();
         }
     }
 
-    @GetMapping("/viewer/all")
-    public List<Viewer> getAllViewers() {
-        return viewerRepo.findAll();
+    @GetMapping("/customer/all")
+    public List<Customer> getAllCustomers() {
+        return customerRepo.findAll();
     }
 
-    @GetMapping("/viewer")
-    public Optional<Viewer> getViewer(@RequestParam int id) {
-        return viewerRepo.findById(id);
+    @GetMapping("/customer")
+    public Optional<Customer> getCustomer(@RequestParam int id) {
+        return customerRepo.findById(id);
     }
 
-    @DeleteMapping("/viewer")
-    public String deleteViewer(@RequestParam int id) {
-        if (viewerRepo.existsById(id)) {
-            viewerRepo.deleteById(id);
-            return "Viewer deleted successfully!";
+    @DeleteMapping("/customer")
+    public String deleteCustomer(@RequestParam int id) {
+        if (customerRepo.existsById(id)) {
+            customerRepo.deleteById(id);
+            return "Customer deleted successfully!";
         }
-        return "Viewer not found!";
+        return "Customer not found!";
     }
 
-    @PutMapping("/viewer/update")
-    public String updateViewer(@RequestBody Viewer viewer) {
-        if (!viewerRepo.existsById(viewer.getId())) {
-            return "Viewer not found!";
+    @PutMapping("/customer/update")
+    public String updateCustomer(@RequestBody Customer customer) {
+        if (!customerRepo.existsById(customer.getId())) {
+            return "Customer not found!";
         }
-        viewerRepo.save(viewer);
-        return "Viewer updated successfully!";
+        customerRepo.save(customer);
+        return "Customer updated successfully!";
     }
-
-
 }

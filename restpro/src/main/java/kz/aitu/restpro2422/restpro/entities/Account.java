@@ -7,16 +7,13 @@ import lombok.Setter;
 import lombok.ToString;
 
 
-
-
-
 @Getter
 @Setter
 @ToString
 @Entity
 @Builder
-@Table(name = "viewer")
-public class Viewer {
+@Table(name = "account")
+public class Account {
 
 
     @Id
@@ -24,30 +21,26 @@ public class Viewer {
     @Column(name = "id", updatable = false, nullable = false)
     private int id;
 
-    @Column(unique = true)
-    private String name;
-    private int age;
+    @Column(name = "account_number", unique = true)
+    private int accountNumber;
+    private double balance;
 
-    private Integer version;
-
-    public Viewer(int id, String name, int age, Integer version) {
+    public Account(int id, int accountNumber, double balance) {
         this.id = id;
-        this.name = name;
-        this.age = age;
-        this.version = version;
+        this.accountNumber = accountNumber;
+        this.balance = balance;
     }
 
-    public Viewer() {
+    public Account() {
         // Конструктор по умолчанию
     }
 
     @Override
     public String toString() {
-        return "viewer{" +
+        return "Account{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", version=" + version +
+                ", accountNumber=" + accountNumber +
+                ", balance=" + balance +
                 '}';
     }
 }
